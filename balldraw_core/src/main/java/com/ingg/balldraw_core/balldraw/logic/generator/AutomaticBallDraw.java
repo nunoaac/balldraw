@@ -5,6 +5,7 @@
  */
 package com.ingg.balldraw_core.balldraw.logic.generator;
 
+import com.ingg.balldraw_core.balldraw.domain.BallDraw;
 import com.ingg.balldraw_core.balldraw.logic.algorithm.SimpleRandomDraw;
 
 /**
@@ -19,12 +20,16 @@ public class AutomaticBallDraw {
 	private final int selection = 50;
 	private SimpleRandomDraw drawGenerator;
 	
-	public void generateAutomaticDraws() throws InterruptedException {
+	public void generateAutomaticDraws(boolean verbose) throws InterruptedException {
 
 		drawGenerator = new SimpleRandomDraw();
+                BallDraw newDraw;
 		
 		for(;;) {
-			System.out.println(drawGenerator.returnBallDraw(pool, selection));
+			newDraw = drawGenerator.returnBallDraw(pool, selection);
+                        if(verbose)
+                            newDraw.toString();
+                        
 			Thread.sleep(DRAW_FREQUENCY);
 		}
 	}

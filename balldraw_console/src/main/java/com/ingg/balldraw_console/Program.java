@@ -5,15 +5,25 @@
  */
 package com.ingg.balldraw_console;
 
+import com.ingg.balldraw_core.balldraw.domain.BallDraw;
 import com.ingg.balldraw_core.balldraw.logic.generator.AutomaticBallDraw;
+import com.ingg.balldraw_core.balldraw.logic.generator.ManualBallDraw;
 
 public class Program {
     
     public static void main (String[] args) throws InterruptedException {
         System.out.println("START");
-		
+        
+        BallDraw newDraw;
+        
+        ManualBallDraw manualBallDrawGenerator = new ManualBallDraw();
+        newDraw = manualBallDrawGenerator.getBallDraw(50, 20, ManualBallDraw.DrawAlgorithm.FISHERYATES);
+        System.out.println(newDraw.toString());
+	newDraw = manualBallDrawGenerator.getBallDraw(50, 20, ManualBallDraw.DrawAlgorithm.SIMPLERANDOM);
+        System.out.println(newDraw.toString());
+        
         AutomaticBallDraw ballDrawGenerator = new AutomaticBallDraw();
-	ballDrawGenerator.generateAutomaticDraws();
+	ballDrawGenerator.generateAutomaticDraws(false);
 		
 	System.out.println("END");
     }

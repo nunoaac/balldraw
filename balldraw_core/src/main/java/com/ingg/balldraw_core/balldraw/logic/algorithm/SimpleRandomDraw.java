@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.ingg.balldraw_core.balldraw.domain.BallDraw;
 
-public class SimpleRandomDraw implements BallDrawGeneratorAlgorithmInterface {
+public class SimpleRandomDraw implements BallDrawAlgorithmInterface {
 
 	public BallDraw returnBallDraw(int pool, int selection) {
 		

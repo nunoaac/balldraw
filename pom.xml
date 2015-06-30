@@ -8,7 +8,8 @@
     <modules>
         <module>balldraw_core</module>
         <module>balldraw_console</module>
-    </modules>
+    <module>balldraw_api</module>
+  </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
