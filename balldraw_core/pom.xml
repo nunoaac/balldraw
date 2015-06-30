@@ -8,13 +8,33 @@
     </parent>
     <artifactId>balldraw_core</artifactId>
     <packaging>jar</packaging>
-    <dependencies>
-        <dependency>
-            <groupId>com.ingg.ball-draw-server</groupId>
-            <artifactId>ball-draw-algorithm</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
+    <profiles>
+		<profile>
+			<id>home</id>
+                        <activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>com.ingg.ball-draw-server</groupId>
+					<artifactId>ball-draw-algorithm</artifactId>
+					<version>1.0.0-SNAPSHOT</version>
+					<scope>system</scope>
+					<systemPath>/Users/nunocosta/.m2/repository/com/ingg/ball-draw-server/ball-draw-algorithm/1.0.0-SNAPSHOT/ball-draw-algorithm-1.0.0-SNAPSHOT.jar</systemPath>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>work</id>
+			<dependencies>
+				<dependency>
+					<groupId>com.ingg.ball-draw-server</groupId>
+					<artifactId>ball-draw-algorithm</artifactId>
+					<version>1.0.0-SNAPSHOT</version>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
