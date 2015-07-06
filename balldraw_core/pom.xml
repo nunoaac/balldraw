@@ -19,8 +19,8 @@
 					<groupId>com.ingg.ball-draw-server</groupId>
 					<artifactId>ball-draw-algorithm</artifactId>
 					<version>1.0.0-SNAPSHOT</version>
-					<scope>system</scope>
-					<systemPath>/Users/nunocosta/.m2/repository/com/ingg/ball-draw-server/ball-draw-algorithm/1.0.0-SNAPSHOT/ball-draw-algorithm-1.0.0-SNAPSHOT.jar</systemPath>
+					<!--<scope>system</scope>-->
+					<!--<systemPath>/Users/nunocosta/.m2/repository/com/ingg/ball-draw-server/ball-draw-algorithm/1.0.0-SNAPSHOT/ball-draw-algorithm-1.0.0-SNAPSHOT.jar</systemPath>-->
 				</dependency>
 			</dependencies>
 		</profile>

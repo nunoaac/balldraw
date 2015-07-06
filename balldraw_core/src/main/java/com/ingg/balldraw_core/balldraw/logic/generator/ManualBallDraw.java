@@ -23,18 +23,19 @@ public class ManualBallDraw {
 
     public static BallDraw getBallDraw(int pool, int selection, DrawAlgorithm algorithm) {
 
-        BallDrawAlgorithmInterface ballDrawGenerator;
-        switch (algorithm) {
-            case FISHERYATES:
-                ballDrawGenerator = new FisherYatesDraw();
-                break;
-            case SIMPLERANDOM:
-                ballDrawGenerator = new SimpleRandomDraw();
-                break;
-            default:
-                return null;
-        }
-        BallDraw newDraw = ballDrawGenerator.returnBallDraw(pool, selection);
+        BallDrawAlgorithmInterface ballDraw;
+//        switch (algorithm) {
+//            case FISHERYATES:
+//                ballDrawGenerator = new FisherYatesDraw();
+//                break;
+//            case SIMPLERANDOM:
+//                ballDrawGenerator = new SimpleRandomDraw();
+//                break;
+//            default:
+//                return null;
+//        }
+        ballDraw = new FisherYatesDraw();
+        BallDraw newDraw = ballDraw.returnBallDraw(pool, selection);
 
         return newDraw;
     }
