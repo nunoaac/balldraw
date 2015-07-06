@@ -23,7 +23,7 @@ public class BallDrawApi {
     @Produces("application/json")
     public String generateDraw() {
         
-        BallDraw newDraw = ManualBallDraw.getBallDraw(50,20, ManualBallDraw.DrawAlgorithm.FISHERYATES); 
+        BallDraw newDraw = ManualBallDraw.getBallDraw(50,20, ManualBallDraw.DrawAlgorithm.SIMPLERANDOM); 
         
         Gson gson = new Gson();
         return gson.toJson(newDraw);
