@@ -6,6 +6,7 @@
 package com.ingg.balldraw_console;
 
 import com.ingg.balldraw_core.balldraw.domain.BallDraw;
+import com.ingg.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface.DrawAlgorithm;
 import com.ingg.balldraw_core.balldraw.logic.generator.AutomaticBallDraw;
 import com.ingg.balldraw_core.balldraw.logic.generator.ManualBallDraw;
 
@@ -17,13 +18,13 @@ public class Program {
         BallDraw newDraw;
         
         ManualBallDraw manualBallDrawGenerator = new ManualBallDraw();
-        newDraw = manualBallDrawGenerator.getBallDraw(50, 20, ManualBallDraw.DrawAlgorithm.FISHERYATES);
+        newDraw = manualBallDrawGenerator.getBallDraw(50, 20, DrawAlgorithm.FISHERYATES);
         System.out.println(newDraw.toString());
-	newDraw = manualBallDrawGenerator.getBallDraw(50, 20, ManualBallDraw.DrawAlgorithm.SIMPLERANDOM);
+	newDraw = manualBallDrawGenerator.getBallDraw(50, 20, DrawAlgorithm.SIMPLERANDOM);
         System.out.println(newDraw.toString());
         
         AutomaticBallDraw ballDrawGenerator = new AutomaticBallDraw();
-	ballDrawGenerator.generateAutomaticDraws(false);
+	ballDrawGenerator.generateAutomaticDraws(true);
 		
 	System.out.println("END");
     }
