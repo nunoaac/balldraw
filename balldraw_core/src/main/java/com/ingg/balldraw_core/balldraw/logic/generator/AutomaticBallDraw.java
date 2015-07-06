@@ -23,10 +23,9 @@ public class AutomaticBallDraw {
 	public void generateAutomaticDraws(boolean verbose) throws InterruptedException {
 
 		drawGenerator = new SimpleRandomDraw();
-                BallDraw newDraw;
 		
 		for(;;) {
-			newDraw = drawGenerator.returnBallDraw(pool, selection);
+			BallDraw newDraw = drawGenerator.returnBallDraw(pool, selection);
                         if(verbose)
                             newDraw.toString();
                         

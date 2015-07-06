@@ -3,7 +3,16 @@ package com.ingg.balldraw_core.balldraw.logic.algorithm;
 import com.ingg.balldraw_core.balldraw.domain.BallDraw;
 
 public interface BallDrawAlgorithmInterface {
+    
+        public enum DrawAlgorithm {
 
-	public BallDraw returnBallDraw(int pool, int selection);
+            FISHERYATES, SIMPLERANDOM
+        }
+        
+        public final int  DEFAULT_POOL_SIZE = 50;
+        public final int  DEFAULT_DRAW_SIZE = 20;
+
+	public BallDraw returnBallDraw(Integer pool, Integer selection);
+        
 
 }
