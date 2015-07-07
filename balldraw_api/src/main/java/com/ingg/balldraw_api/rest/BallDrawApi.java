@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ingg.balldraw_api.rest;
 
 import com.google.gson.Gson;
@@ -11,19 +6,17 @@ import com.google.gson.JsonElement;
 import com.ingg.balldraw_core.balldraw.domain.BallDraw;
 import com.ingg.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface;
 import com.ingg.balldraw_core.balldraw.logic.generator.ManualBallDraw;
-import java.net.HttpURLConnection;
-import java.text.DateFormat;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
 
 /**
+ * Class that handles the generation requests delivered by the Servlet Each
+ * method represents a specific algorithm
  *
- * @author support
+ * @author Nuno Costa (nunoaac@msn.com)
  */
 @Path("/draw")
 public class BallDrawApi {

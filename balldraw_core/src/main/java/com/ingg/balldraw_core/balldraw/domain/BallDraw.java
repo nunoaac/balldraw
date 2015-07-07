@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ingg.balldraw_core.balldraw.domain;
 
 import com.ingg.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface.DrawAlgorithm;
@@ -11,6 +6,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Represents a balldraw, with generation timestamp, Pool size, Draw itself and
+ * algorithm used to generate the draw.
+ *
+ * @author Nuno Costa (nunoaac@msn.com)
+ */
 public class BallDraw {
 
     private final Date creationDate;
@@ -39,6 +40,15 @@ public class BallDraw {
 
     public DrawAlgorithm getAlgorithm() {
         return algorithm;
+    }
+
+    /**
+     * Return ball draw size - Number of balls on the draw
+     *
+     * @return Number of ball draws generated
+     */
+    public int getSize() {
+        return this.draw.size();
     }
 
     @Override

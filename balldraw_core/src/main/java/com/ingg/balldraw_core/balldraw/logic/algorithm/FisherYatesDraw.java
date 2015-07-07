@@ -6,6 +6,13 @@ import com.ingg.balldraw_core.balldraw.domain.BallDraw;
 import com.ingg.RandomBallDrawGenerator;
 import com.ingg.BallDrawGenerator;
 
+/**
+ * FisherYates implementation of a ball draw (using external JARs) Implements
+ * BallDrawAlgorithmInterface that forces implementations to generate ball draws
+ * with a specific pool size and selection.
+ *
+ * @author Nuno Costa (nunoaac@msn.com)
+ */
 public class FisherYatesDraw implements BallDrawAlgorithmInterface {
 
     @Override
