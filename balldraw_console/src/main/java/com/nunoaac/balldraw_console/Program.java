@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ingg.balldraw_console;
+package com.nunoaac.balldraw_console;
 
-import com.ingg.balldraw_core.balldraw.domain.BallDraw;
-import com.ingg.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface.DrawAlgorithm;
-import com.ingg.balldraw_core.balldraw.logic.generator.AutomaticBallDraw;
-import com.ingg.balldraw_core.balldraw.logic.generator.ManualBallDraw;
+import com.nunoaac.balldraw_core.balldraw.domain.BallDraw;
+import com.nunoaac.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface.DrawAlgorithm;
+import com.nunoaac.balldraw_core.balldraw.logic.generator.AutomaticBallDraw;
+import com.nunoaac.balldraw_core.balldraw.logic.generator.ManualBallDraw;
 
 public class Program {
 

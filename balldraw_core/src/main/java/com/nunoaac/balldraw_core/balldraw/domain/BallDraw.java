@@ -1,6 +1,6 @@
-package com.ingg.balldraw_core.balldraw.domain;
+package com.nunoaac.balldraw_core.balldraw.domain;
 
-import com.ingg.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface.DrawAlgorithm;
+import com.nunoaac.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface.DrawAlgorithm;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;

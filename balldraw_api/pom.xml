@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
     <artifactId>balldraw_parent</artifactId>
-    <groupId>com.ingg</groupId>
+    <groupId>com.nunoaac</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-    <groupId>com.ingg</groupId>
+    <groupId>com.nunooaac</groupId>
     <artifactId>balldraw_api</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
@@ -32,9 +32,10 @@
             <version>2.2.4</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>com.nunoaac</groupId>
             <artifactId>balldraw_core</artifactId>
-            <version>${project.version}</version>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>javax</groupId>

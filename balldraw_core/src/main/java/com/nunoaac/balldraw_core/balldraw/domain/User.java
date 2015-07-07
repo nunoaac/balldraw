@@ -1,4 +1,4 @@
-package com.ingg.balldraw_core.balldraw.domain;
+package com.nunoaac.balldraw_core.balldraw.domain;
 
 import java.util.List;
 

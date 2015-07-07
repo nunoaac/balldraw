@@ -1,6 +1,6 @@
-package com.ingg.balldraw_core.balldraw.logic.algorithm;
+package com.nunoaac.balldraw_core.balldraw.logic.algorithm;
 
-import com.ingg.balldraw_core.balldraw.domain.BallDraw;
+import com.nunoaac.balldraw_core.balldraw.domain.BallDraw;
 
 /**
  * Every algorithm used on this project should implement this interface. After

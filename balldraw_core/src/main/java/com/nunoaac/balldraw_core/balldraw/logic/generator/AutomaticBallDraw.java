@@ -1,10 +1,10 @@
-package com.ingg.balldraw_core.balldraw.logic.generator;
+package com.nunoaac.balldraw_core.balldraw.logic.generator;
 
-import com.ingg.balldraw_core.balldraw.domain.BallDraw;
-import com.ingg.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface;
-import com.ingg.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface.DrawAlgorithm;
-import com.ingg.balldraw_core.balldraw.logic.algorithm.FisherYatesDraw;
-import com.ingg.balldraw_core.balldraw.logic.algorithm.SimpleRandomDraw;
+import com.nunoaac.balldraw_core.balldraw.domain.BallDraw;
+import com.nunoaac.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface;
+import com.nunoaac.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface.DrawAlgorithm;
+import com.nunoaac.balldraw_core.balldraw.logic.algorithm.FisherYatesDraw;
+import com.nunoaac.balldraw_core.balldraw.logic.algorithm.SimpleRandomDraw;
 
 /**
  * Keeps the program generating Ball Draws every (DRAW_FREQUENCY) seconds.

@@ -1,4 +1,4 @@
-package com.ingg.balldraw_core.balldraw.logic.algorithm;
+package com.nunoaac.balldraw_core.balldraw.logic.algorithm;
 
 import java.util.List;
 import java.util.Random;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.ingg.balldraw_core.balldraw.domain.BallDraw;
+import com.nunoaac.balldraw_core.balldraw.domain.BallDraw;
 
 /**
  * Simple Random implementation of a Ball Draw
