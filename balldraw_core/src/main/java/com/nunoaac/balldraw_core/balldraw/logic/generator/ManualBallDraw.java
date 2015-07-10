@@ -25,7 +25,7 @@ public class ManualBallDraw {
      * @param algorithm Algorithm to pick and shuffle the Draw
      * @return Ball Draw object that includes all info related with a draw
      */
-    public static BallDraw getBallDraw(int pool, int selection, DrawAlgorithm algorithm) {
+    public  BallDraw getBallDraw(int pool, int selection, DrawAlgorithm algorithm) {
 
         BallDrawAlgorithmInterface ballDrawGenerator;
         switch (algorithm) {

@@ -55,7 +55,8 @@ public class BallDrawApi {
      */
     private JsonElement generateJson(int pool, int selection, BallDrawAlgorithmInterface.DrawAlgorithm drawAlgorithm) {
 
-        BallDraw newDraw = ManualBallDraw.getBallDraw(pool, selection, drawAlgorithm);
+        ManualBallDraw manualGenerator = new ManualBallDraw();
+        BallDraw newDraw = manualGenerator.getBallDraw(pool, selection, drawAlgorithm);
 
         Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy HH:mm:ss zzz").create();
         JsonElement jsonElement = gson.toJsonTree(newDraw);
