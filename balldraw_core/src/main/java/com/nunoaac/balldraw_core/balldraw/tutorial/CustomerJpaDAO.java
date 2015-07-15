@@ -25,7 +25,7 @@ import javax.persistence.criteria.Root;
 public class CustomerJpaDAO extends GenericJpaDAO implements Serializable  {
 
     public CustomerJpaDAO() { 
-        super(CustomerJpaDAO.class);
+        super(Customer.class);
     }
 
     public Customer findCustomer(Long id) {

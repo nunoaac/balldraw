@@ -26,26 +26,6 @@ public class PurchaseJpaDAO extends GenericJpaDAO implements Serializable {
         super(PurchaseJpaDAO.class);
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            Purchase purchase;
-            try {
-                purchase = em.getReference(Purchase.class, id);
-                purchase.getId();
-            } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The purchase with id " + id + " no longer exists.", enfe);
-            }
-            em.remove(purchase);
-            em.getTransaction().commit();
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
 
     public List<Purchase> findPurchaseEntities() {
         return findPurchaseEntities(true, -1, -1);

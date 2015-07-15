@@ -24,7 +24,11 @@ public class Program {
         custController.create(diogo);
         diogo.setLastName("F.");
         custController.edit(diogo, diogo.getId());
-        
+        custController.destroy(diogo.getId());
+        Customer filipa = new Customer("Filipa", "Alpendre", 789);
+        custController.create(filipa);
+        custController.destroy(filipa.getId());
+       
         Customer nuno = new Customer("Nuno", "Costa", 234);
         custController.create(nuno);
         
@@ -38,7 +42,7 @@ public class Program {
         prodController.edit(product);
         
         Purchase purchase = new Purchase();
-        purchase.setCustomer(diogo);
+        purchase.setCustomer(nuno);
         purchase.setPurchaseTimestamp(new java.util.Date());
         PurchaseJpaDAO purController = new PurchaseJpaDAO();
         purController.create(purchase);

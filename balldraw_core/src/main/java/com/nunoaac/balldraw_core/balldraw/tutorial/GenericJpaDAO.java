@@ -9,6 +9,7 @@ import com.nunoaac.balldraw_core.balldraw.tutorial.exceptions.NonexistentEntityE
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Persistence;
@@ -60,8 +61,8 @@ public abstract class GenericJpaDAO<T, ID, K> {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                if (findById(entity, id) == null) {
-                    throw new NonexistentEntityException("The purchase with id " + id + " no longer exists.");
+                if (findById(id) == null) {
+                    throw new NonexistentEntityException("The " + entityClass.getName() + " with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -72,7 +73,26 @@ public abstract class GenericJpaDAO<T, ID, K> {
         }
     }
 
-    public T findById(T entity, ID id) {
+    public void destroy(ID id) throws NonexistentEntityException {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            T returnedRow = em.getReference(entityClass, id);
+            if (returnedRow == null) {
+                throw new NonexistentEntityException("The " + entityClass.getSimpleName() + " with id " + id + " no longer exists.");
+            }
+            em.remove(returnedRow);
+            em.getTransaction().commit();
+
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public T findById(ID id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(entityClass, id);
@@ -80,8 +100,8 @@ public abstract class GenericJpaDAO<T, ID, K> {
             em.close();
         }
     }
-    
-    public List<T>getRowByFieldJPQL(T entity, K field, String jpqlName) {
+
+    public List<T> getRowByFieldJPQL(T entity, K field, String jpqlName) {
         return null;
     }
 
