@@ -3,7 +3,7 @@ package com.nunoaac.balldraw_console;
 import com.nunoaac.balldraw_core.balldraw.domain.beans.BallDraw;
 import com.nunoaac.balldraw_core.balldraw.domain.daos.BallDrawJpaDAO;
 import com.nunoaac.balldraw_core.balldraw.domain.beans.Client;
-import com.nunoaac.balldraw_core.balldraw.domain.daos.UserJpaDAO;
+import com.nunoaac.balldraw_core.balldraw.domain.daos.ClientJpaDAO;
 import com.nunoaac.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface.DrawAlgorithm;
 import com.nunoaac.balldraw_core.balldraw.logic.generator.AutomaticBallDraw;
 import com.nunoaac.balldraw_core.balldraw.logic.generator.ManualBallDraw;
@@ -23,13 +23,17 @@ public class Program {
 
     public static void main(String[] args) throws InterruptedException, Exception {
 
+        
        
         Client user = new Client("nunoaac", "123qwe");
         
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.nunoaac_balldraw_core_jar_1.0-SNAPSHOTPU");
-        UserJpaDAO jpac = new UserJpaDAO();
+        ClientJpaDAO jpac = new ClientJpaDAO();
         jpac.create(user);
         
+        jpac.getHashPasswordForClient("nunoaac");
+        
+        /*
         BallDraw newDraw;
         ManualBallDraw drawGen = new ManualBallDraw();
         newDraw = drawGen.getBallDraw(50, 20, DrawAlgorithm.SIMPLERANDOM);
@@ -39,7 +43,7 @@ public class Program {
         
         Client retrievedClient = jpac.findUser(user.getId());
         System.out.println(retrievedClient.toString());
-        
+        */
         //testBallDrawDao();
         //testDaoAndPatterns();
         //testManualAndAutoDraw();
@@ -128,8 +132,7 @@ public class Program {
         ManualBallDraw drawGen = new ManualBallDraw();
         newDraw = drawGen.getBallDraw(50, 20, DrawAlgorithm.SIMPLERANDOM);
         
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.nunoaac_balldraw_core_jar_1.0-SNAPSHOTPU");
-        BallDrawJpaDAO jpac = new BallDrawJpaDAO(emf);
+        BallDrawJpaDAO jpac = new BallDrawJpaDAO();
         jpac.create(newDraw);
         
         System.out.println(newDraw.toString());

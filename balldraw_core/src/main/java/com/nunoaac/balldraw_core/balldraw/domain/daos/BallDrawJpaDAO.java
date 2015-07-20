@@ -26,7 +26,7 @@ import javax.persistence.criteria.Root;
 public class BallDrawJpaDAO extends GenericDAO implements Serializable {
 
     public BallDrawJpaDAO() {
-        super();
+        super(BallDraw.class);
     }
 
     /**
