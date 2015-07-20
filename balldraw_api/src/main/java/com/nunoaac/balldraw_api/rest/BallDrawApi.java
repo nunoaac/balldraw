@@ -3,7 +3,7 @@ package com.nunoaac.balldraw_api.rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
-import com.nunoaac.balldraw_core.balldraw.domain.BallDraw;
+import com.nunoaac.balldraw_core.balldraw.domain.beans.BallDraw;
 import com.nunoaac.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface;
 import com.nunoaac.balldraw_core.balldraw.logic.generator.ManualBallDraw;
 import javax.ws.rs.DefaultValue;

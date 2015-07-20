@@ -1,6 +1,6 @@
 package com.nunoaac.balldraw_core.balldraw.logic.generator;
 
-import com.nunoaac.balldraw_core.balldraw.domain.BallDraw;
+import com.nunoaac.balldraw_core.balldraw.domain.beans.BallDraw;
 import com.nunoaac.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface;
 import com.nunoaac.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface.DrawAlgorithm;
 import com.nunoaac.balldraw_core.balldraw.logic.algorithm.FisherYatesDraw;

@@ -1,6 +1,6 @@
 package com.nunoaac.balldraw_core.balldraw.logic.algorithm;
 
-import com.nunoaac.balldraw_core.balldraw.domain.BallDraw;
+import com.nunoaac.balldraw_core.balldraw.domain.beans.BallDraw;
 
 /**
  * Every algorithm used on this project should implement this interface. After

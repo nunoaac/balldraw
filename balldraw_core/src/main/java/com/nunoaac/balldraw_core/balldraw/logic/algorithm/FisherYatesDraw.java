@@ -2,7 +2,7 @@ package com.nunoaac.balldraw_core.balldraw.logic.algorithm;
 
 import java.util.List;
 
-import com.nunoaac.balldraw_core.balldraw.domain.BallDraw;
+import com.nunoaac.balldraw_core.balldraw.domain.beans.BallDraw;
 import com.ingg.RandomBallDrawGenerator;
 import com.ingg.BallDrawGenerator;
 
