@@ -72,7 +72,7 @@ public class BallDrawJpaDAO extends GenericDAO implements Serializable {
             }
         }
     }
-
+/*
     public void destroy(UUID id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -93,7 +93,7 @@ public class BallDrawJpaDAO extends GenericDAO implements Serializable {
             }
         }
     }
-
+*/
     public List<BallDraw> findBallDrawEntities() {
         return findBallDrawEntities(true, -1, -1);
     }

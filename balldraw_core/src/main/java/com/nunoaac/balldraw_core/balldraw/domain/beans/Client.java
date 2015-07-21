@@ -2,12 +2,14 @@ package com.nunoaac.balldraw_core.balldraw.domain.beans;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 /**
  * Represents an Client, with username, hashPassword, id and list of generated draws
@@ -16,6 +18,7 @@ import javax.persistence.OneToMany;
  * @author support
  */
 @Entity
+@CascadeOnDelete
 public class Client implements Serializable{
 
     @Id
@@ -25,7 +28,8 @@ public class Client implements Serializable{
     private String username;
     @Column(nullable=false)
     private String hashPassword;
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", orphanRemoval=true, cascade={CascadeType.ALL})
+    @CascadeOnDelete
     private List<BallDraw> draws;
 
     public Client() {

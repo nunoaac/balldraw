@@ -23,7 +23,8 @@ public class Program {
 
     public static void main(String[] args) throws InterruptedException, Exception {
 
-        
+        testBallDrawDao();
+        /*
        
         Client user = new Client("nunoaac", "123qwe");
         
@@ -32,7 +33,7 @@ public class Program {
         jpac.create(user);
         
         jpac.getHashPasswordForClient("nunoaac");
-        
+        */
         /*
         BallDraw newDraw;
         ManualBallDraw drawGen = new ManualBallDraw();
@@ -128,9 +129,19 @@ public class Program {
     }
     
     public static void testBallDrawDao() throws Exception {
+        
+        Client cl = new Client("nunoaac", "123qwe");
+        ClientJpaDAO clientDao = new ClientJpaDAO();
+        clientDao.create(cl);
+        
         BallDraw newDraw;
         ManualBallDraw drawGen = new ManualBallDraw();
         newDraw = drawGen.getBallDraw(50, 20, DrawAlgorithm.SIMPLERANDOM);
+        
+        List<BallDraw>oldList = cl.getDraws();
+        oldList.add(newDraw);
+        cl.setDraws(oldList);
+        newDraw.setClient(cl);
         
         BallDrawJpaDAO jpac = new BallDrawJpaDAO();
         jpac.create(newDraw);
@@ -139,6 +150,8 @@ public class Program {
         
         BallDraw secondDraw = jpac.findBallDraw(newDraw.getUid());
         System.out.println(secondDraw.toString());
+        
+        clientDao.destroy(cl.getId());
     }
 
 }

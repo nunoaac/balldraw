@@ -1,7 +1,6 @@
 package com.nunoaac.balldraw_core.balldraw.domain.beans;
 
 import com.nunoaac.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface.DrawAlgorithm;
-import com.nunoaac.balldraw_core.balldraw.tutorial.Customer;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,6 +16,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -47,7 +47,6 @@ public class BallDraw implements Serializable {
     private DrawAlgorithm algorithm;
     private Integer size = 0;
     private String uid;
-    @ManyToOne()
     private Client client;
 
     public BallDraw() {
@@ -79,6 +78,8 @@ public class BallDraw implements Serializable {
         return draw;
     }
 
+    @ManyToOne()
+    @JoinColumn(nullable=false)
     public Client getClient() {
         return client;
     }

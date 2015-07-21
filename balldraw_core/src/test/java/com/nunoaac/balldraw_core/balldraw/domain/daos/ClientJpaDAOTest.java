@@ -23,53 +23,27 @@ import org.junit.rules.ExpectedException;
  *
  * @author nunocosta
  */
-public class ClientJpaDAOTest<ID> {
-
-    static ClientJpaDAO bdDao;
-    HashMap<GenericDAO, ID> toDelete;
+public class ClientJpaDAOTest<ID> extends JpaDAOTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     public ClientJpaDAOTest() {
-        bdDao = new ClientJpaDAO();
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-        toDelete = new HashMap<GenericDAO, ID>();
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
-        for (Map.Entry<GenericDAO, ID> entry : toDelete.entrySet()) {
-            GenericDAO dao = entry.getKey();
-            ID id = entry.getValue();
-            dao.destroy(id);
-        }
+        super();
     }
 
     @Test
     public void testCreateClient() throws Exception {
         System.out.println("JUnit Test - ClientJpaDAO - Create normal client");
 
-        int numberOfClients = bdDao.getEntityCount();
+        int numberOfClients = bdClientDao.getEntityCount();
 
         Client client = new Client("test" + RandomStringUtils.random(10, true, false), "123qwe");
-        bdDao.create(client);
+        bdClientDao.create(client);
 
         assertNotNull("testCreate is not working correctly. ID of created row is null", client.getId());
-        toDelete.put(bdDao, (ID) client.getId());
-        int newNumberOfClients = bdDao.getEntityCount();
+        toDelete.put(bdClientDao, (ID) client.getId());
+        int newNumberOfClients = bdClientDao.getEntityCount();
         assertEquals("testCreate is not working correctly. Number of client rows has not incremented with a createClient call", (numberOfClients + 1), newNumberOfClients);
     }
 
@@ -77,22 +51,22 @@ public class ClientJpaDAOTest<ID> {
     public void testCreateClientWithSameUsername() throws Exception {
         System.out.println("JUnit Test - ClientJpaDAO - Create client with same username");
 
-        int numberOfClients = bdDao.getEntityCount();
+        int numberOfClients = bdClientDao.getEntityCount();
 
         String randomUsername = "test" + RandomStringUtils.random(10, true, false);
         Client client = new Client(randomUsername, "123qwe");
-        bdDao.create(client);
+        bdClientDao.create(client);
 
         assertNotNull("testCreate is not working correctly. ID of created row is null", client.getId());
-        toDelete.put(bdDao, (ID) client.getId());
+        toDelete.put(bdClientDao, (ID) client.getId());
 
         client = new Client(randomUsername, "qwe123");
 
         thrown.expect(javax.persistence.RollbackException.class);
         thrown.expectMessage("ERROR: duplicate key value violates unique constraint \"client_username_key\"");
-        bdDao.create(client);
+        bdClientDao.create(client);
 
-        int newNumberOfClients = bdDao.getEntityCount();
+        int newNumberOfClients = bdClientDao.getEntityCount();
         assertEquals("testCreateClientWithSameUsername is not working correctly. Number of client rows has not incremented only by 1", (numberOfClients + 1), newNumberOfClients);
     }
 
@@ -103,7 +77,7 @@ public class ClientJpaDAOTest<ID> {
         Client client = new Client("test" + RandomStringUtils.random(10, true, false), "123qwe");
         auxiliaryPersistClient(client);
 
-        Client retrievedClient = (Client) bdDao.findById(client.getId());
+        Client retrievedClient = (Client) bdClientDao.findById(client.getId());
         assertTrue("testFindClientById is returning a different client that was expected", client.equals(retrievedClient));
     }
 
@@ -115,9 +89,9 @@ public class ClientJpaDAOTest<ID> {
         auxiliaryPersistClient(client);
 
         client.setHashPassword("newPassword");
-        bdDao.edit(client, client.getId());
+        bdClientDao.edit(client, client.getId());
 
-        Client retrievedClient = (Client) bdDao.findById(client.getId());
+        Client retrievedClient = (Client) bdClientDao.findById(client.getId());
         assertTrue("testFindClientById is returning a different client that was expected", client.equals(retrievedClient));
 
     }
@@ -126,16 +100,16 @@ public class ClientJpaDAOTest<ID> {
     public void testDestroy() throws Exception {
         System.out.println("JUnit Test - ClientJpaDAO - Delete client");
 
-        int numberOfClients = bdDao.getEntityCount();
+        int numberOfClients = bdClientDao.getEntityCount();
         Client client = new Client("test" + RandomStringUtils.random(10, true, false), "123qwe");
         auxiliaryPersistClient(client);
 
-        bdDao.destroy(client.getId());
+        bdClientDao.destroy(client.getId());
 
-        Client retrievedClient = (Client) bdDao.findById(client.getId());
         thrown.expect(javax.persistence.EntityNotFoundException.class);
+        Client retrievedClient = (Client) bdClientDao.findById(client.getId());
         assertNull("testDestroy is not deleting the client from the database", retrievedClient);
-        int newNumberOfClients = bdDao.getEntityCount();
+        int newNumberOfClients = bdClientDao.getEntityCount();
         assertEquals("testDestroy is not working correctly. Number of client rows is not the same", numberOfClients, newNumberOfClients);
     }
 
@@ -148,7 +122,7 @@ public class ClientJpaDAOTest<ID> {
         Client client = new Client(randomUsername, randomHashPassword);
         auxiliaryPersistClient(client);
 
-        assertEquals("testGetHashPassword not working correctly. Passwords don't match", bdDao.getHashPasswordForClient(client.getUsername()), randomHashPassword);
+        assertEquals("testGetHashPassword not working correctly. Passwords don't match", bdClientDao.getHashPasswordForClient(client.getUsername()), randomHashPassword);
     }
 
     @Test
@@ -157,12 +131,6 @@ public class ClientJpaDAOTest<ID> {
         
         String randomUsername = RandomStringUtils.random(10, true, false);
         thrown.expect(javax.persistence.NoResultException.class);
-        bdDao.getHashPasswordForClient(randomUsername);
-    }
-
-    public void auxiliaryPersistClient(Client client) throws Exception {
-        bdDao.create(client);
-        assertNotNull("auxiliaryCreateClient is not working correctly. ID of created row is null", client.getId());
-        toDelete.put(bdDao, (ID) client.getId());
+        bdClientDao.getHashPasswordForClient(randomUsername);
     }
 }

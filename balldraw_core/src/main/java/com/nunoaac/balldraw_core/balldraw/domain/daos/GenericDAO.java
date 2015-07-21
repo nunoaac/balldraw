@@ -72,6 +72,7 @@ public abstract class GenericDAO<T, ID> {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            System.out.println(id);
             T returnedRow = em.getReference(entityClass, id);
             if (returnedRow == null) {
                 throw new NonexistentEntityException("The " + entityClass.getSimpleName() + " with id " + id + " no longer exists.");
