@@ -1,6 +1,7 @@
 package com.nunoaac.balldraw_core.balldraw.domain.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -71,8 +72,19 @@ public class Client implements Serializable{
         return draws;
     }
 
-    public void setDraws(List<BallDraw> draws) {
-        this.draws = draws;
+    public void setDraws(List<BallDraw> draws) {        
+        for(BallDraw draw : draws) {
+            addBallDraw(draw);
+        }
+    }
+    
+    public void addBallDraw(BallDraw bdraw) {
+        
+        if(this.draws == null) {
+            this.draws = new ArrayList<BallDraw>();
+        }
+        this.draws.add(bdraw);
+        bdraw.setClient(this);
     }
 
     @Override

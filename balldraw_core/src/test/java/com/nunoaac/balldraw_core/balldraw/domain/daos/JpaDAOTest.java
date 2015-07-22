@@ -87,7 +87,8 @@ public class JpaDAOTest<ID> {
         DrawAlgorithm algorithm = algorithmPool.get(r.nextInt(algorithmPool.size()));
         
         BallDraw newDraw = auxiliaryGenerateManualBallDraw(pool, size, algorithm);
-        newDraw.setClient(drawOwner);
+        if(drawOwner != null)
+            drawOwner.addBallDraw(newDraw);
         
         return newDraw;
     }

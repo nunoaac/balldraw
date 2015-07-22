@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nunoaac.balldraw_core.balldraw.domain.daos;
 
 import com.nunoaac.balldraw_core.balldraw.domain.beans.BallDraw;
 import com.nunoaac.balldraw_core.balldraw.domain.beans.Client;
-import java.util.Map;
+import java.util.List;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Test;
@@ -18,16 +13,17 @@ import org.junit.rules.ExpectedException;
 /**
  *
  * @author nunocosta
+ * @param <ID>
  */
 public class BallDrawJpaDAOTest<ID> extends JpaDAOTest {
-    
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     public BallDrawJpaDAOTest() {
         super();
     }
-    
+
     @Override
     @After
     public void tearDown() throws Exception {
@@ -36,6 +32,7 @@ public class BallDrawJpaDAOTest<ID> extends JpaDAOTest {
 
     @Test
     public void testCreateBallDraw() throws Exception {
+        System.out.println("JUnit Test - BallDrawJpaDAO - Create ball draw");
 
         Client user = new Client("test" + RandomStringUtils.random(10, true, false), "123qwe");
         auxiliaryPersistClient(user);
@@ -52,21 +49,24 @@ public class BallDrawJpaDAOTest<ID> extends JpaDAOTest {
 
     @Test
     public void testCreateBallDrawWithoutUser() throws Exception {
+        System.out.println("JUnit Test - BallDrawJpaDAO - Create Ball Draw without user");
+
         int numberOfDraws = bdDrawDao.getEntityCount();
-        
+
         BallDraw newDraw = auxiliaryRandomGenerateManualBallDraw(null);
-        
+
         thrown.expect(javax.persistence.RollbackException.class);
         thrown.expectMessage("ERROR: null value in column \"client_id\" violates not-null constraint");
         auxiliaryPersistBallDraw(newDraw);
-        
+
         int newNumberOfDraws = bdDrawDao.getEntityCount();
         assertEquals("testCreateBallDrawWithoutUser is not working correctly. Draw without client has been persisted.", numberOfDraws, newNumberOfDraws);
     }
-    
+
     @Test
     public void testDestroyBallDraw() throws Exception {
-        
+        System.out.println("JUnit Test - BallDrawJpaDAO - Delete Ball Draw");
+
         Client user = new Client("test" + RandomStringUtils.random(10, true, false), "123qwe");
         auxiliaryPersistClient(user);
 
@@ -75,12 +75,51 @@ public class BallDrawJpaDAOTest<ID> extends JpaDAOTest {
 
         int numberOfDraws = bdDrawDao.getEntityCount();
         bdDrawDao.destroy(newDraw.getUid());
-        
+
         //thrown.expect(javax.persistence.EntityNotFoundException.class);
         BallDraw retrievedBallDraw = (BallDraw) bdDrawDao.findById(newDraw.getUid());
         assertNull("testDestroy is not deleting the ball draw from the database", retrievedBallDraw);
         int newNumberOfDraws = bdDrawDao.getEntityCount();
-        assertEquals("testDestroy is not working correctly. Number of ball draw rows is not the same", (numberOfDraws-1), newNumberOfDraws);
+        assertEquals("testDestroy is not working correctly. Number of ball draw rows is not the same", (numberOfDraws - 1), newNumberOfDraws);
     }
 
+    @Test
+    public void testFindBallDrawById() throws Exception {
+        System.out.println("JUnit Test - BallDrawJpaDAO - Find BallDraw by ID");
+
+        Client client = new Client("test" + RandomStringUtils.random(10, true, false), "123qwe");
+        auxiliaryPersistClient(client);
+
+        BallDraw newDraw = auxiliaryRandomGenerateManualBallDraw(client);
+        bdDrawDao.create(newDraw);
+
+        BallDraw retrievedBallDraw = (BallDraw) bdDrawDao.findById(newDraw.getUid());
+        assertTrue("testFindBallDrawById is returning a different ball draw that was expected", newDraw.equals(retrievedBallDraw));
+    }
+
+    @Test
+    public void testGetAllDrawsFromClient() throws Exception {
+        System.out.println("JUnit Test - BallDrawJpaDAO - Get all BallDraws from client (using client's username and client's id");
+        
+        
+        Client client = new Client("test" + RandomStringUtils.random(10, true, false), "123qwe");
+        auxiliaryPersistClient(client);
+        
+        BallDraw newDraw = auxiliaryRandomGenerateManualBallDraw(client);
+        bdDrawDao.create(newDraw);
+        
+        newDraw = auxiliaryRandomGenerateManualBallDraw(client);
+        bdDrawDao.create(newDraw);
+        
+        List<BallDraw> listBall = bdDrawDao.findBallDrawsFromClientByUsername(client.getUsername());
+        assertEquals("List of client's ball draws is not equal to the list got from the DB (via client's username)", client.getDraws(), listBall);
+        
+        List<BallDraw> listBall2 = bdDrawDao.findBallDrawsFromClientById(client.getId()); 
+        assertEquals("List of client's ball draws is not equal to the list got from the DB (via client's id)", client.getDraws(), listBall2);
+    }
+
+    
+    //TODO - Test forbidden edit
+    //TODO - Test destroy client with ball draws
+    //TODO - CLean up this suite 
 }

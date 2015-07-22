@@ -1,19 +1,7 @@
 package com.nunoaac.balldraw_core.balldraw.domain.daos;
 
-import com.nunoaac.balldraw_core.balldraw.domain.beans.BallDraw;
 import com.nunoaac.balldraw_core.balldraw.domain.beans.Client;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.eclipse.persistence.exceptions.DatabaseException;
-import org.hamcrest.Matcher;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Rule;
@@ -22,6 +10,7 @@ import org.junit.rules.ExpectedException;
 /**
  *
  * @author nunocosta
+ * @param <ID>
  */
 public class ClientJpaDAOTest<ID> extends JpaDAOTest {
 

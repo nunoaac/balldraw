@@ -171,6 +171,50 @@ public class BallDraw implements Serializable {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final BallDraw other = (BallDraw) obj;
+        if (this.creationDate != other.creationDate && (this.creationDate == null || !this.creationDate.equals(other.creationDate))) {
+            return false;
+        }
+        if (this.pool != other.pool && (this.pool == null || !this.pool.equals(other.pool))) {
+            return false;
+        }
+        if (this.draw != other.draw && (this.draw == null || !this.draw.equals(other.draw))) {
+            return false;
+        }
+        if ((this.drawString == null) ? (other.drawString != null) : !this.drawString.equals(other.drawString)) {
+            return false;
+        }
+        if (this.algorithm != other.algorithm) {
+            return false;
+        }
+        if (this.size != other.size && (this.size == null || !this.size.equals(other.size))) {
+            return false;
+        }
+        if ((this.uid == null) ? (other.uid != null) : !this.uid.equals(other.uid)) {
+            return false;
+        }
+        if (this.client != other.client && (this.client == null || !this.client.equals(other.client))) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+
+    @Override
     public String toString() {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");

@@ -2,12 +2,9 @@ package com.nunoaac.balldraw_core.balldraw.domain.daos;
 
 import com.nunoaac.balldraw_core.balldraw.domain.beans.Client;
 import com.nunoaac.balldraw_core.balldraw.domain.daos.exceptions.NonexistentEntityException;
-import com.nunoaac.balldraw_core.balldraw.domain.daos.exceptions.PreexistingEntityException;
-import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
@@ -72,7 +69,6 @@ public abstract class GenericDAO<T, ID> {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            System.out.println(id);
             T returnedRow = em.getReference(entityClass, id);
             if (returnedRow == null) {
                 throw new NonexistentEntityException("The " + entityClass.getSimpleName() + " with id " + id + " no longer exists.");

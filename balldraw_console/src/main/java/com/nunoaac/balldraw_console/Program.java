@@ -138,10 +138,7 @@ public class Program {
         ManualBallDraw drawGen = new ManualBallDraw();
         newDraw = drawGen.getBallDraw(50, 20, DrawAlgorithm.SIMPLERANDOM);
         
-        List<BallDraw>oldList = cl.getDraws();
-        oldList.add(newDraw);
-        cl.setDraws(oldList);
-        newDraw.setClient(cl);
+        cl.addBallDraw(newDraw);
         
         BallDrawJpaDAO jpac = new BallDrawJpaDAO();
         jpac.create(newDraw);

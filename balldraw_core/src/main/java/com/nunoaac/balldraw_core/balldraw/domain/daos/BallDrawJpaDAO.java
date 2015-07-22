@@ -16,6 +16,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -138,6 +140,22 @@ public class BallDrawJpaDAO extends GenericDAO implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    public List<BallDraw> findBallDrawsFromClientByUsername (String username) throws NoResultException {
+        
+        TypedQuery<BallDraw> q3 = getEntityManager().createQuery("SELECT b FROM BallDraw b WHERE b.client.username = :userParam", BallDraw.class);
+        q3.setParameter("userParam", username);
+        
+        return q3.getResultList();
+    }
+    
+    public List<BallDraw> findBallDrawsFromClientById (Long client_id) throws NoResultException {
+        
+        TypedQuery<BallDraw> q3 = getEntityManager().createQuery("SELECT b FROM BallDraw b WHERE b.client.id = :userParam", BallDraw.class);
+        q3.setParameter("userParam", client_id);
+        
+        return q3.getResultList();
     }
     
 }
