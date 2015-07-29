@@ -34,10 +34,12 @@ public class ClientJpaDAO extends GenericDAO implements Serializable {
             if (cl == null) {
                 throw new NonexistentEntityException("The Client with id " + id + " no longer exists.");
             }
-            
-            List<BallDraw> clientDraws = findBallDrawsFromClientById(cl.getId());
-            
-            em.remove(returnedRow);
+
+            Query q3 = em.createNamedQuery("BallDraw.DeleteByClientId");
+            q3.setParameter("clientId", id);
+            int delRows = q3.executeUpdate();
+
+            em.remove(cl);
             em.getTransaction().commit();
 
         } finally {
@@ -46,7 +48,6 @@ public class ClientJpaDAO extends GenericDAO implements Serializable {
             }
         }
 
-        
     }
 
     public String getHashPasswordForClient(String username) throws NoResultException {
