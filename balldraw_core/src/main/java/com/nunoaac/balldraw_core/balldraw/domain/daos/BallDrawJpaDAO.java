@@ -7,15 +7,10 @@ package com.nunoaac.balldraw_core.balldraw.domain.daos;
 
 import com.nunoaac.balldraw_core.balldraw.domain.beans.BallDraw;
 import com.nunoaac.balldraw_core.balldraw.domain.daos.exceptions.NonexistentEntityException;
-import com.nunoaac.balldraw_core.balldraw.domain.daos.exceptions.PreexistingEntityException;
-import com.nunoaac.balldraw_core.balldraw.tutorial.GenericJpaDAO;
 import java.io.Serializable;
 import java.util.List;
-import java.util.UUID;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
@@ -31,48 +26,10 @@ public class BallDrawJpaDAO extends GenericDAO implements Serializable {
         super(BallDraw.class);
     }
 
-    /**
-    public void create(BallDraw ballDraw) throws PreexistingEntityException, Exception {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            em.persist(ballDraw);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findBallDraw(ballDraw.getUid()) != null) {
-                throw new PreexistingEntityException("BallDraw " + ballDraw + " already exists.", ex);
-            }
-            throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
-*/
-    
+  
     public void edit(BallDraw ballDraw) throws NonexistentEntityException, Exception {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            ballDraw = em.merge(ballDraw);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            String msg = ex.getLocalizedMessage();
-            if (msg == null || msg.length() == 0) {
-                String id = ballDraw.getUid();
-                if (findBallDraw(id) == null) {
-                    throw new NonexistentEntityException("The ballDraw with id " + id + " no longer exists.");
-                }
-            }
-            throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        
+        throw new UnsupportedOperationException("Ball Draws are final and can't be edited.");
     }
 /*
     public void destroy(UUID id) throws NonexistentEntityException {
