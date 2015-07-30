@@ -18,6 +18,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -37,6 +39,7 @@ import javax.persistence.Transient;
  * @author Nuno Costa (nunoaac@msn.com)
  */
 @Entity
+@NamedQueries({@NamedQuery(name="BallDraw.DeleteByClientId", query = "DELETE FROM BallDraw b WHERE b.client.id=:clientId")})
 @Access(value = AccessType.PROPERTY)          //this means that the JPA serialzier will use both getter and setter methods - we use this because we want to set the draw variable when reading the drawString var
 public class BallDraw implements Serializable {
 
