@@ -1,6 +1,8 @@
 package com.nunoaac.balldraw_core.balldraw.domain.daos;
 
+import com.nunoaac.balldraw_core.balldraw.domain.beans.BallDraw;
 import com.nunoaac.balldraw_core.balldraw.domain.beans.Client;
+import static com.nunoaac.balldraw_core.balldraw.domain.daos.JpaDAOTest.bdDrawDao;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -121,5 +123,24 @@ public class ClientJpaDAOTest<ID> extends JpaDAOTest {
         String randomUsername = RandomStringUtils.random(10, true, false);
         thrown.expect(javax.persistence.NoResultException.class);
         bdClientDao.getHashPasswordForClient(randomUsername);
+    }
+    
+    @Test
+    public void testDestroyClientWithBallDraws() throws Exception {
+        System.out.println("JUnit Test - ClientJpaDAO - Test Cascade Delete");
+        
+        Client client = new Client("test" + RandomStringUtils.random(10, true, false), "123qwe");
+        auxiliaryPersistClient(client);
+        
+        BallDraw newDraw = auxiliaryRandomGenerateManualBallDraw(client);
+        bdDrawDao.create(newDraw);
+        
+        bdClientDao.destroy(client);
+        
+        BallDraw retrievedBallDraw = (BallDraw) bdDrawDao.findById(newDraw.getUid());
+        assertNull("testDestroyClientWithBallDraws is not deleting the client's ball draw from the database", retrievedBallDraw);
+        
+        Client retrievedClient = (Client) bdClientDao.findById(client.getId());
+        assertNull("testDestroyClientWithBallDraws is not deleting the client from the database, after deleting his ball draws", retrievedClient);
     }
 }

@@ -3,6 +3,7 @@ package com.nunoaac.balldraw_core.balldraw.domain.daos;
 import com.nunoaac.balldraw_core.balldraw.domain.beans.BallDraw;
 import com.nunoaac.balldraw_core.balldraw.domain.beans.Client;
 import com.nunoaac.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface.DrawAlgorithm;
+import com.nunoaac.balldraw_core.balldraw.logic.algorithm.InvalidDrawParametersException;
 import com.nunoaac.balldraw_core.balldraw.logic.generator.ManualBallDraw;
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,10 +11,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
@@ -83,8 +87,11 @@ public class JpaDAOTest<ID> {
 
         int size = r.nextInt(sizeMaxValue - sizeMinValue) + sizeMinValue;
 
+        /*
         List<DrawAlgorithm> algorithmPool = Collections.unmodifiableList(Arrays.asList(DrawAlgorithm.values()));
         DrawAlgorithm algorithm = algorithmPool.get(r.nextInt(algorithmPool.size()));
+        */
+        DrawAlgorithm algorithm = DrawAlgorithm.SIMPLERANDOM;
         
         BallDraw newDraw = auxiliaryGenerateManualBallDraw(pool, size, algorithm);
         if(drawOwner != null)
@@ -96,7 +103,12 @@ public class JpaDAOTest<ID> {
     public BallDraw auxiliaryGenerateManualBallDraw(int pool, int size, DrawAlgorithm algorithm) {
 
         ManualBallDraw drawGen = new ManualBallDraw();
-        BallDraw newDraw = drawGen.getBallDraw(pool, size, algorithm);
+        BallDraw newDraw = null;
+        try {
+            newDraw = drawGen.getBallDraw(pool, size, algorithm);
+        } catch (InvalidDrawParametersException ex) {
+            fail(ex.getMessage());
+        }
         return newDraw;
     }
 

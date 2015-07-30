@@ -117,9 +117,21 @@ public class BallDrawJpaDAOTest<ID> extends JpaDAOTest {
         List<BallDraw> listBall2 = bdDrawDao.findBallDrawsFromClientById(client.getId()); 
         assertEquals("List of client's ball draws is not equal to the list got from the DB (via client's id)", client.getDraws(), listBall2);
     }
-
     
-    //TODO - Test forbidden edit
+    @Test
+    public void testEdit() throws Exception {
+        System.out.println("JUnit Test - BallDrawJpaDAO - Test forbidden edit");
+        
+        Client client = new Client("test" + RandomStringUtils.random(10, true, false), "123qwe");
+        auxiliaryPersistClient(client);
+        
+        BallDraw newDraw = auxiliaryRandomGenerateManualBallDraw(client);
+        bdDrawDao.create(newDraw);
+        
+        thrown.expect(UnsupportedOperationException.class);
+        bdDrawDao.edit(newDraw);
+    }
+    
     //TODO - Test destroy client with ball draws
     //TODO - CLean up this suite 
 }
