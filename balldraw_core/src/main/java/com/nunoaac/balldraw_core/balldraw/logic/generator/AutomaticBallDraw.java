@@ -4,6 +4,7 @@ import com.nunoaac.balldraw_core.balldraw.domain.beans.BallDraw;
 import com.nunoaac.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface;
 import com.nunoaac.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface.DrawAlgorithm;
 import com.nunoaac.balldraw_core.balldraw.logic.algorithm.FisherYatesDraw;
+import com.nunoaac.balldraw_core.balldraw.logic.algorithm.InvalidDrawParametersException;
 import com.nunoaac.balldraw_core.balldraw.logic.algorithm.SimpleRandomDraw;
 
 /**
@@ -21,7 +22,7 @@ public class AutomaticBallDraw {
     private BallDrawAlgorithmInterface drawGenerator;
 
     //verboser - If true, the generated ball draws are printed to the stdout
-    public void generateAutomaticDraws(boolean verbose, DrawAlgorithm algorithm, Integer pool, Integer selection) throws InterruptedException {
+    public void generateAutomaticDraws(boolean verbose, DrawAlgorithm algorithm, Integer pool, Integer selection) throws InterruptedException, InvalidDrawParametersException {
 
         if (algorithm == algorithm.SIMPLERANDOM) {
             drawGenerator = new SimpleRandomDraw();

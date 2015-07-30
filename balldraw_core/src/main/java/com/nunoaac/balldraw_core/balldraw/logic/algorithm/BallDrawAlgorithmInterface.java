@@ -18,6 +18,8 @@ public interface BallDrawAlgorithmInterface {
     public final int DEFAULT_POOL_SIZE = 50;
     public final int DEFAULT_DRAW_SIZE = 20;
 
-    public BallDraw returnBallDraw(Integer pool, Integer selection);
+    public BallDraw returnBallDraw(Integer pool, Integer selection) throws InvalidDrawParametersException;
+    
+    public void validateBallDraw(Integer pool, Integer selection) throws InvalidDrawParametersException;
 
 }

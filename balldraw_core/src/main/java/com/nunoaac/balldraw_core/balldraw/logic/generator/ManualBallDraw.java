@@ -6,6 +6,7 @@ import com.nunoaac.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInter
 import static com.nunoaac.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface.DrawAlgorithm.FISHERYATES;
 import static com.nunoaac.balldraw_core.balldraw.logic.algorithm.BallDrawAlgorithmInterface.DrawAlgorithm.SIMPLERANDOM;
 import com.nunoaac.balldraw_core.balldraw.logic.algorithm.FisherYatesDraw;
+import com.nunoaac.balldraw_core.balldraw.logic.algorithm.InvalidDrawParametersException;
 import com.nunoaac.balldraw_core.balldraw.logic.algorithm.SimpleRandomDraw;
 
 /**
@@ -24,8 +25,9 @@ public class ManualBallDraw {
      * @param selection Draw Size - Number of generated balls
      * @param algorithm Algorithm to pick and shuffle the Draw
      * @return Ball Draw object that includes all info related with a draw
+     * @throws com.nunoaac.balldraw_core.balldraw.logic.algorithm.InvalidDrawParametersException
      */
-    public  BallDraw getBallDraw(int pool, int selection, DrawAlgorithm algorithm) {
+    public  BallDraw getBallDraw(int pool, int selection, DrawAlgorithm algorithm) throws InvalidDrawParametersException {
 
         BallDrawAlgorithmInterface ballDrawGenerator;
         switch (algorithm) {

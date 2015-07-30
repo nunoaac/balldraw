@@ -16,7 +16,9 @@ import com.nunoaac.balldraw_core.balldraw.domain.beans.BallDraw;
 public class SimpleRandomDraw implements BallDrawAlgorithmInterface {
 
     @Override
-    public BallDraw returnBallDraw(Integer pool, Integer selection) {
+    public BallDraw returnBallDraw(Integer pool, Integer selection) throws InvalidDrawParametersException {
+        
+        validateBallDraw(pool, selection);          //this will throw an error if the validation fails. It will not continue the ball draw generation method.
 
         //using Java 8 optionals to check if Integer params are null. If so, assign them with default values (pool = 50, selection = 20)
         pool = pool != null ? pool : DEFAULT_POOL_SIZE;
@@ -44,7 +46,32 @@ public class SimpleRandomDraw implements BallDrawAlgorithmInterface {
         while (set.size() < selection) {
             set.add(rand.nextInt(pool) + 1);           //formula here: http://stackoverflow.com/questions/363681/generating-random-integers-in-a-range-with-java
         }
+        
         return new ArrayList<Integer>(set);
     }
+
+    /**
+     * Mechaist to validate SimpleRandom ball draw settings
+     * @param pool Max value of the generated balls
+     * @param selection Number of generated Balls
+     * @throws InvalidDrawParametersException Throws exception if validation fails
+     */
+    public void validateBallDraw(Integer pool, Integer selection) throws InvalidDrawParametersException {
+        
+        if(((pool == null) && (selection != null)) || ((pool !=null) && (selection ==null)))
+            throw new InvalidDrawParametersException("You should either give both pool and selection values or none.");
+            
+        if(selection > pool)
+            throw new InvalidDrawParametersException("Selection size cannot be greater than pool size");
+        
+        if((pool < 1) || (selection < 1)) 
+            throw new InvalidDrawParametersException("Pool/Selection values should be greater than 0");
+        
+        if((pool > Integer.MAX_VALUE))
+            throw new InvalidDrawParametersException("Pool Max Value is " + Integer.MAX_VALUE);
+               
+    }
+    
+    
 
 }
